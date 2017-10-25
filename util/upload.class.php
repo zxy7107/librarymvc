@@ -163,7 +163,6 @@ class upFiles
 	                    $this->printMsg($this->lastError);
 	                    continue;
 	                }
-	                
 	                //检查文件扩展名是否合法
 	                if(!$this->checkType($type))
 	                {
@@ -171,7 +170,6 @@ class upFiles
 	                    $this->printMsg($this->lastError);
 	                    continue;
 	                }
-	                
 	                //检测当前文件是否非法提交
 	                if(!is_uploaded_file($tmpname))
 	                {
@@ -179,13 +177,13 @@ class upFiles
 	                    $this->printMsg($this->lastError);
 	                    continue;
 	                }
-	                
 	                //移动后的文件名称
 	                $basename = $this->getBaseName($name,'.'.$type);
 	                //上传文件重新命名
 	                list($usec, $sec) = explode(" ",microtime());
 	                $savename = substr($usec,2).'.'.$type;
 	                //创建上传文件的文件夹
+	                
 	                createdir($this->saveFilePath);
 	                $dir1 = $this->saveFilePath.'/'.date('Y');
 	                createdir($dir1);
@@ -195,14 +193,19 @@ class upFiles
 	                createdir($dir2);
 	                createdir($thumb_dir);
 	                createdir($cover_dir);
+
 	                //最终组合的文件路径
 	                $this->finalFile = $dir2.'/'.$savename;
+	             
 	                //把上传的文件从临时目录移到目标目录
 	                if(!move_uploaded_file($tmpname,$this->finalFile))
 	                {
-	                    $this->$this->uploadFiles['error'];
+	                    // $this->$this->uploadFiles['error'];
+	                    $this->uploadFiles['error'];
+	                    
 	                    $this->printMsg($this->lastError);
 	                    continue;
+
 	                }
 	                //存储已经上传的文件信息
 	                $tembasename = $this->getBaseName($savename,'.'.$type);
@@ -219,6 +222,8 @@ class upFiles
 	                    'cover_dir'     =>$cover_dir."/"
 	                );
 	            }
+	          else {
+	          }
         }
         //返回上传的文件数量
         return count($this->saveFileInfo);

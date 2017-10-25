@@ -55,8 +55,6 @@ class BookService {
 		 
 		$res = $sqlHelper->execute_dml ( $sql );
 		
-		//echo $sql;
-		//exit();
 		
 		$sqlHelper->close_connect ();
 		return $res;

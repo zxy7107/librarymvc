@@ -32,7 +32,7 @@ require_once 'controller/CheckLoginState.php';
 	 </iframe>
 	</div>
 	
-	<div id="footer">
+	<div id="footer" style="display:none;">
 		<p>双鱼林设计 QQ:287307421或254540457 手机:13908064703 &copy;版权所有 <a href="http://www.shuangyulin.com" target="_blank">双鱼林设计网</a></p>
 	</div>
 </div>

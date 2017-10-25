@@ -31,21 +31,21 @@ if(!empty($_REQUEST['action'])) {
 		$book->setPublishDate($array_book['publishDate']);
 		
 		
-		$photo = "/upload/NoImage.jpg"; 
+		$photo = "../upload/NoImage.jpg"; 
 		if ($_FILES['photo']['name'] != ''){
 			/*--  实例化上传类  --*/
 			$file = $_FILES['photo'];
 			$upload_path = '../upload';
 			$allow_type = array('jpg','bmp','png','gif','jpeg');
 			$max_size=2048000;
-		
 			$upload = new upFiles($file, $upload_path, $max_size, $allow_type);
+
 			$upload->upload();
+
 			$pic = $upload->getSaveFileInfo();
-			 
-			$photo = substr($pic['path'], 2)."/".$pic['savename']; 
+			// $photo = substr($pic['path'], 2)."/".$pic['savename']; 
+			$photo = $pic['path']."/".$pic['savename']; 
 		}
-		
 		$book->setPhoto($photo);
 		
 		//完成添加->数据库

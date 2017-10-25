@@ -32,6 +32,9 @@
 			// }
 
 			$this->mysqli = new mysqli($this->host,$this->username,$this->password, $this->dbname);
+			$this->mysqli->query("set character set 'utf8'");
+			$this->mysqli->query("set names 'utf8'");
+			
 			// $result = $mysqli->query("SELECT 'Hello, dear MySQL user!' AS _message FROM DUAL");
 			// $row = $result->fetch_assoc();
 			// echo htmlentities($row['_message']);
@@ -49,7 +52,7 @@
 		//执行dql语句 返回的是一个数组
 		public function execute_dql2($sql) {
 			$arr = array();
-			$res = $this->mysqli->query($sql) or die($this->mysqli->error());
+			$res = $this->mysqli->query($sql) or die($this->mysqli->error);
 			///$i=0;
 			//把$res=>$arr(结果集内容转移到数组中)
 			while($row=$res->fetch_assoc()) {
@@ -66,7 +69,7 @@
 		//$sql2 = "select count(id) from 表名"
 		public function execute_dql_fenye($sql1,$sql2,$fenyePage) {
 			//这里我们查询了要分页显示的数据
-			$res =  $this->mysqli->query($sql1) or die($this->mysqli->error());
+			$res =  $this->mysqli->query($sql1) or die($this->mysqli->error);
 			//$res => arrary()
 			$arr = array();
 			//把$res转移到$arr
@@ -76,7 +79,7 @@
 			
 			mysqli_free_result($res);
 			
-			$res2 =  $this->mysqli->query($sql2) or die($this->mysqli->error());
+			$res2 =  $this->mysqli->query($sql2) or die($this->mysqli->error);
 			
 			if($row = mysqli_fetch_row($res2)) {
 				$fenyePage->pageCount = ceil($row[0]/$fenyePage->pageSize);
@@ -128,7 +131,8 @@
 		}
 		//执行dml语句
 		public function execute_dml($sql) {
-			$b = $this->mysqli->query($sql) or die($this->mysqli->error());
+		
+			$b = $this->mysqli->query($sql) or die($this->mysqli->error);
 			// $b = mysql_query($sql,$this->conn) or die(mysql_error());
 			if(!$b) { 
 				return 0;
